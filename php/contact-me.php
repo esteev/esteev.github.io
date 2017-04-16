@@ -2,7 +2,7 @@
 session_start();
 
 
-require_once '../libs/phpmailer/PHPMailerAutoload.php';
+require_once 'libs/phpmailer/PHPMailerAutoload.php';
 
 
 
@@ -10,7 +10,7 @@ $errors =[];
 
 
 
-if(isset($_POST['email'])){
+if(isset($_POST['name'], $_POST['email-address'], $_POST['subject'], $_POST['message'])){
 
     $fields = [
 
@@ -40,7 +40,7 @@ if(isset($_POST['email'])){
 
 
 
-        $m->isSMTP();
+        // $m->isSMTP();
 
         $m->SMTPAuth = true;
 
@@ -77,7 +77,7 @@ if(isset($_POST['email'])){
 
 
         if ($m->send()) {
-            header('Location: ../index.html');
+            header('Location: http://bizarregamestudios.com/index.html');
 
         }else{
             $errors[] = 'Sorry, could not send the email. Please try again later.';
@@ -96,6 +96,6 @@ else{
 }
 
 
-header('Location: ../index.html');
+header('Location: http://bizarregamestudios.com/index.html');
 
 ?>

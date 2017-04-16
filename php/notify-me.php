@@ -1,100 +1,98 @@
 <?php
+session_start();
 
-/* ******************************************************** */
-/* Please visit the help file to set correctly this file :) */
-/* ******************************************************** */
 
-// Set to "mailchimp" or "file"
-$STORE_MODE = "mailchimp";
+require_once '../libs/phpmailer/PHPMailerAutoload.php';
 
-// MailChimp API Key findable in your Mailchimp's dashboard
-$API_KEY =  "ba8b2ba82db89851781d0f6bd0bd2881-us15";
-			 
-// MailChimp List ID  findable in your Mailchimp's dashboard
-$LIST_ID =  "58911";
-			 
-// After $_SERVER["DOCUMENT_ROOT"]." , write the path to your .txt to save the emails of the subscribers
-$STORE_FILE = $_SERVER["DOCUMENT_ROOT"]."/subscription-list.txt";
 
-/* ************************************ */
-// Don't forget to check the path below
-/* ************************************ */
- 
-require('MailChimp.php');
 
-/* ***************************************************** */
-// For the part below, no interventions are required
-/* ***************************************************** */
+$errors =[];
 
-if($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["email"])) {
 
-	$email = $_POST["email"];
-	
-	header('HTTP/1.1 200 OK');
-	header('Status: 200 OK');
-	header('Content-type: application/json');
 
-	// Checking if the email writing is good
-	if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		
-		// The part for the storage in a .txt
-		if ($STORE_MODE == "file") {
-			
-			// SUCCESS SENDING
-			if(@file_put_contents($STORE_FILE, strtolower($email)."\r\n", FILE_APPEND)) {
-				echo json_encode(array(
-						"status" => "success"
-					));
-			// ERROR SENDING
-			} else {
-				echo json_encode(array(
-						"status" => "error",
-						"type" => "FileAccessError"
-					));
-			}
-		
-		// The part for the storage in Mailchimp
-		} elseif ($STORE_MODE == "mailchimp") {
-			
-			$MailChimp = new \Drewm\MailChimp($API_KEY);
-			
-			$result = $MailChimp->call('lists/subscribe', array(
-		                'id'                => $LIST_ID,
-		                'email'             => array('email'=>$email),
-		                'double_optin'      => false,
-		                'update_existing'   => true,
-		                'replace_interests' => false,
-		                'send_welcome'      => true,
-		            ));     
-	
-			// SUCCESS SENDING
-			if($result["email"] == $email) {     	
-				echo json_encode(array(
-						"status" => "success"
-					));
-			// ERROR SENDING
-			} else {
-				echo json_encode(array(
-						"status" => "error",
-						"type" => $result["name"]
-					));
-			}
-		// ERROR
-		} else {
-			echo json_encode(array(
-					"status" => "error",
-				));
-		}
-	// ERROR DURING THE VALIDATION 
-	} else {
-		echo json_encode(array(
-				"status" => "error",
-				"type" => "ValidationError"
-			));
-	}
-} else {
-	header('HTTP/1.1 403 Forbidden');
-	header('Status: 403 Forbidden');
+if(isset($_POST['email'])){
+
+    $fields = [
+
+        'email' => $_POST['email']
+    ];
+
+
+
+    foreach ($fields as $field => $data) {
+
+        if (empty($data)) {
+
+            $errors[] = 'The '. $field .' field is required.';
+
+        }
+
+    }
+
+
+
+    if (empty($errors)) {
+
+        $m = new PHPMailer;
+
+
+
+        $m->isSMTP();
+
+        $m->SMTPAuth = true;
+
+
+
+        $m->Host = 'smtp.gmail.com';
+
+        $m->Username = 'bizarregamestudios@gmail.com';
+
+        $m->Password = 'youdidthistoher';
+
+        $m->SMTPSecure = 'ssl';
+
+        $m->Port = 465;
+
+
+
+        $m->isHTML();
+
+
+
+        $m->Subject = 'Query!';
+
+        $m->Body = '<p>Email: ' .$fields['email']. '</p>';
+
+
+
+        $m->FromName = "Contact Form";
+
+
+
+        $m->AddAddress('bizarregamestudios@gmail.com','Suryank Tiwari');
+
+
+
+        if ($m->send()) {
+            header('Location: ../index.html');
+
+        }else{
+            $errors[] = 'Sorry, could not send the email. Please try again later.';
+            var_dump($errors);
+            die();
+        }
+
+    }
+
 }
+
+else{
+
+    $errors[] = "There's something wrong!";
+
+}
+
+
+header('Location: ../index.html');
 
 ?>

@@ -1,69 +1,101 @@
 <?php
-if($_POST) {
+session_start();
 
-    $to_Email = "myemail@email.com"; // Write your email here
-   
-    // Use PHP To Detect An Ajax Request
-    if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-   
-        // Exit script for the JSON data
-        $output = json_encode(
-        array(
-            'type'=> 'error',
-            'text' => 'Request must come from Ajax'
-        ));
-       
-        die($output);
-    }
-   
-    // Checking if the $_POST vars well provided, Exit if there is one missing
-    if(!isset($_POST["userName"]) || !isset($_POST["userEmail"]) || !isset($_POST["userSubject"]) || !isset($_POST["userMessage"])) {
-        
-        $output = json_encode(array('type'=>'error', 'text' => '<i class="icon ion-close-round"></i> Input fields are empty!'));
-        die($output);
-    }
-   
-    // PHP validation for the fields required
-    if(empty($_POST["userName"])) {
-        $output = json_encode(array('type'=>'error', 'text' => '<i class="icon ion-close-round"></i> We are sorry but your name is too short or not specified.'));
-        die($output);
-    }
-    
-    if(!filter_var($_POST["userEmail"], FILTER_VALIDATE_EMAIL)) {
-        $output = json_encode(array('type'=>'error', 'text' => '<i class="icon ion-close-round"></i> Please enter a valid email address.'));
-        die($output);
+
+require_once '../libs/phpmailer/PHPMailerAutoload.php';
+
+
+
+$errors =[];
+
+
+
+if(isset($_POST['email'])){
+
+    $fields = [
+
+        'name' => $_POST['name'],
+        'email-address' => $_POST['email-address'],
+        'subject' => $_POST['subject'],
+        'message' => $_POST['message']
+    ];
+
+
+
+    foreach ($fields as $field => $data) {
+
+        if (empty($data)) {
+
+            $errors[] = 'The '. $field .' field is required.';
+
+        }
+
     }
 
-    // To avoid the spammy bots, you can change the value of the minimum characters required. Here it's <20
-    if(strlen($_POST["userMessage"])<20) {
-        $output = json_encode(array('type'=>'error', 'text' => '<i class="icon ion-close-round"></i> Too short message! Take your time and write a few words.'));
-        die($output);
+
+
+    if (empty($errors)) {
+
+        $m = new PHPMailer;
+
+
+
+        $m->isSMTP();
+
+        $m->SMTPAuth = true;
+
+
+
+        $m->Host = 'smtp.gmail.com';
+
+        $m->Username = 'bizarregamestudios@gmail.com';
+
+        $m->Password = 'youdidthistoher';
+
+        $m->SMTPSecure = 'ssl';
+
+        $m->Port = 465;
+
+
+
+        $m->isHTML();
+
+
+
+        $m->Subject = 'Query!';
+
+        $m->Body = '<p>Name: ' .$fields['name']. '</p>'.'<p>Email: ' .$fields['email-address']. '</p>'.'<p>Subject: ' .$fields['subject']. '</p>'.'<p>Message: ' .$fields['message']. '</p>';
+
+
+
+        $m->FromName = "Contact Form";
+
+
+
+        $m->AddAddress('bizarregamestudios@gmail.com','Suryank Tiwari');
+
+
+
+        if ($m->send()) {
+            header('Location: ../index.html');
+
+        }else{
+            $errors[] = 'Sorry, could not send the email. Please try again later.';
+            var_dump($errors);
+            die();
+        }
+
     }
-   
-    // Proceed with PHP email
-    $headers = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
-    $headers .= 'From: My website' . "\r\n";
-    $headers .= 'Reply-To: '.$_POST["userEmail"]."\r\n";
-    
-    'X-Mailer: PHP/' . phpversion();
-    
-    // Body of the Email received in your Mailbox
-    $emailcontent = 'Hey! You have received a new message from the visitor <strong>'.$_POST["userName"].'</strong><br/><br/>'. "\r\n" .
-                'His message: <br/> <em>'.$_POST["userMessage"].'</em><br/><br/>'. "\r\n" .
-                '<strong>Feel free to contact '.$_POST["userName"].' via email at : '.$_POST["userEmail"].'</strong>' . "\r\n" ;
-    
-    $Mailsending = @mail($to_Email, $_POST["userSubject"], $emailcontent, $headers);
-   
-    if(!$Mailsending) {
-        
-        //If mail couldn't be sent output error. Check your PHP email configuration (if it ever happens)
-        $output = json_encode(array('type'=>'error', 'text' => '<i class="icon ion-close-round"></i> Oops! Looks like something went wrong, please check your PHP mail configuration.'));
-        die($output);
-        
-    } else {
-        $output = json_encode(array('type'=>'message', 'text' => '<i class="icon ion-checkmark-round"></i> Hello '.$_POST["userName"].', Your message has been sent, we will get back to you asap !'));
-        die($output);
-    }
+
 }
+
+else{
+
+    $errors[] = "There's something wrong!";
+
+}
+
+
+header('Location: ../index.html');
+
 ?>

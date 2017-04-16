@@ -93,13 +93,6 @@ else{
 }
 
 
-
-$_SESSION['errors'] = $errors;
-
-$_SESSION['fields'] = $fields;
-
-
-
 header('Location: ../index.html');
 
 ?>

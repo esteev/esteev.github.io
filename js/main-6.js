@@ -213,9 +213,9 @@ $(document).ready(function(){
     // Set you end date just below
     $('#countdown_dashboard').countDown({
         targetDate: {
-            'day': 31,
-            'month': 12,
-            'year': 2016,
+            'day': 17,
+            'month': 09,
+            'year': 2017,
             'hour': 11,
             'min': 13,
             'sec': 0

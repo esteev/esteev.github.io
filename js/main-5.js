@@ -147,7 +147,7 @@ $(document).ready(function(){
         targetDate: {
             'day': 17,
             'month': 9,
-            'year': 2017,
+            'year': 2018,
             'hour': 11,
             'min': 13,
             'sec': 0

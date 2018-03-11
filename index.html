@@ -31,10 +31,123 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+
+        * {
+            box-sizing: border-box
+        }
+
+        /* Slideshow container */
+
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+
+        .mySlides {
+            display: none;
+        }
+
+        /* Next & previous buttons */
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* Position the "next button" to the right */
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Caption text */
+
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active,
+        .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
     </style>
-
-
-
 </head>
 
 <body>
@@ -128,19 +241,17 @@
         </div>
     </section>
 
-    <section class="carousel slide cid-qLVcehXqSG" data-interval="false" id="slider1-r">
+    <section class="" data-interval="false" id="">
 
-
-
-        <div class="full-screen">
-            <div class="mbr-slider slide carousel" data-pause="true" data-keyboard="false" data-ride="false" data-interval="false">
-                <ol class="carousel-indicators">
+        <!-- <div class="full-screen">
+            <div class="mbr-slider slide carousel" data-pause="true" data-keyboard="false" data-ride="false" data-interval="false"> -->
+        <!-- <ol class="carousel-indicators">
                     <li data-app-prevent-settings="" data-target="#slider1-r" class=" active" data-slide-to="0"></li>
                     <li data-app-prevent-settings="" data-target="#slider1-r" data-slide-to="1"></li>
                     <li data-app-prevent-settings="" data-target="#slider1-r" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item slider-fullscreen-image active" data-bg-video-slide="false" style="background-image: url(assets/images/pmbanner-1200x750.png);">
+                </ol> -->
+        <!-- <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item slider-fullscreen-image active" data-bg-video-slide="false" style="background-image: url(assets/images/pmbanner-1200x750.png); background-position: 100% 100% !important;">
                         <div class="container container-slide">
                             <div class="image_wrapper">
                                 <img src="assets/images/pmbanner-1200x750.png">
@@ -160,7 +271,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item slider-fullscreen-image" data-bg-video-slide="false" style="background-image: url(assets/images/dvd-home-1-1600x900.png);">
+                    <div class="carousel-item slider-fullscreen-image" data-bg-video-slide="false" style="background-image: url(assets/images/dvd-home-1-1600x900.png); background-position: 100% 100% !important;">
                         <div class="container container-slide">
                             <div class="image_wrapper">
                                 <img src="assets/images/dvd-home-1-1600x900.png">
@@ -185,7 +296,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item slider-fullscreen-image" data-bg-video-slide="false" style="background-image: url(assets/images/mbr-1623x1080.jpg);">
+                    <div class="carousel-item slider-fullscreen-image" data-bg-video-slide="false" style="background-image: url(assets/images/mbr-1623x1080.jpg); background-position: 100% 100% !important">
                         <div class="container container-slide">
                             <div class="image_wrapper">
                                 <div class="mbr-overlay"></div>
@@ -202,25 +313,51 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides">
+                <div class="numbertext">1 / 3</div>
+                <img src="assets/images/pmbanner-1200x750.png" style="width:100%">
+                <div class="text">
+                    <p>A modern mashup of Pong and Block Breaker taken to a 3D spirit in a fun to play casual mobile game.</p>
+                    <div class="mbr-section-btn" buttons="0">
+                        <a class="btn  btn-success display-4" href="https://play.google.com/store/apps/details?id=com.BizzareGames.PongManiac&hl=en"
+                            target="_blank">PLAY STORE</a>
+                        <a class="btn  btn-white-outline display-4" href="page2.html#header8-1d">MORE</a>
+                    </div>
                 </div>
-                <a data-app-prevent-settings="" class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#slider1-r">
-                    <span aria-hidden="true" class="mbri-left mbr-iconfont"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a data-app-prevent-settings="" class="carousel-control carousel-control-next" role="button" data-slide="next" href="#slider1-r">
-                    <span aria-hidden="true" class="mbri-right mbr-iconfont"></span>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 3</div>
+                <img src="assets/images/dvd-home1-1200x750.png" style="width:100%">
+                <div class="text">Caption Two</div>
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 3</div>
+                <img src="assets/images/dsa.png" style="width:100%">
+                <div class="text">Caption Three</div>
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
 
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
     </section>
 
     <section class="tabs1 cid-qLYffZSJ93 mbr-parallax-background" id="tabs1-w">
-
-
-
-
         <div class="container">
             <h2 class="mbr-white align-center pb-5 mbr-fonts-style mbr-bold display-2">
                 A little about us</h2>
@@ -233,10 +370,6 @@
                         <li class="nav-item">
                             <a class="nav-link mbr-fonts-style active show display-7" role="tab" data-toggle="tab" href="#tabs1-w_tab1" aria-selected="true">What we plan to do</a>
                         </li>
-
-
-
-
                     </ul>
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane in active" role="tabpanel">
@@ -267,10 +400,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -278,9 +407,6 @@
     </section>
 
     <section class="features16 cid-qLYto7Z98R" id="features16-12">
-
-
-
         <div class="container align-center">
             <h2 class="pb-3 mbr-fonts-style mbr-section-title display-2">
                 OUR BIZARRE TEAM
@@ -300,7 +426,6 @@
                         <div class="item-role px-2">
                             <p>Developer, Designer</p>
                         </div>
-
                     </div>
                 </div>
                 <div class="team-item col-lg-3 col-md-6">
@@ -351,14 +476,8 @@
     </section>
 
     <section class="features16 cid-qLYrmZqTDo" id="features16-11">
-
-
-
         <div class="container align-center">
-
-
             <div class="row media-row">
-
                 <div class="team-item col-lg-3 col-md-6">
                     <div class="item-image">
                         <img src="assets/images/ghi-510x510.png" alt="" title="">
@@ -409,9 +528,6 @@
     </section>
 
     <section class="mbr-section info1 cid-qLYfG0zA16" id="info1-x">
-
-
-
         <div class="mbr-overlay" style="opacity: 0.8; background-color: rgb(239, 239, 239);">
         </div>
         <div class="container">
@@ -430,9 +546,6 @@
     </section>
 
     <section class="mbr-gallery mbr-slider-carousel cid-qLVcbFR63m" id="gallery3-q">
-
-
-
         <div>
             <div>
                 <!-- Filter -->
@@ -551,14 +664,9 @@
                 </div>
             </div>
         </div>
-
     </section>
 
     <section class="mbr-section form1 cid-qLYDw3nGdJ" id="form1-14">
-
-
-
-
         <div class="container">
             <div class="row justify-content-center">
                 <div class="title col-12 col-lg-8">
@@ -612,44 +720,8 @@
     </section>
 
     <section class="cid-qLV4Rbb00H" id="footer1-j">
-
-
-
-
-
         <div class="container">
-            <!-- <div class="media-container-row content text-white">
-                <div class="col-12 col-md-3">
-                    <div class="media-wrap">
-                        <a href="https://mobirise.com/">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-12 col-md-3 mbr-fonts-style display-7">
-                    <h5 class="pb-3">
-
-                    </h5>
-                    <p class="mbr-text"></p>
-                </div>
-                <div class="col-12 col-md-3 mbr-fonts-style display-7">
-                    <h5 class="pb-3">
-                        <p class="mbr-text">
-                            <br>(+91) 9654123230
-                            <br>(+91) 8130358627
-                            <br>
-                        </p>
-                </div>
-                <div class="col-12 col-md-3 mbr-fonts-style display-7">
-                    <h5 class="pb-3"></h5>
-                    <p class="mbr-text"></p>
-                </div>
-            </div> -->
             <div class="footer-lower">
-                <!-- <div class="media-container-row">
-                    <div class="col-sm-12">
-                        <hr>
-                    </div>
-                </div> -->
                 <div class="media-container-row mbr-white" style="padding-top: 20px; padding-bottom: 20px;">
                     <div class="col-sm-6 copyright">
                         <img src="assets/images/logo-122x122.png" height="31px" alt="Mobirise" title="">
@@ -714,5 +786,51 @@
     <script src="assets/formoid/formoid.min.js"></script>
 
 </body>
+
+<script>
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 4000); // Change image every 2 seconds
+    }
+</script>
 
 </html>

@@ -335,13 +335,26 @@
             <div class="mySlides">
                 <div class="numbertext">2 / 3</div>
                 <img src="assets/images/dvd-home1-1200x750.png" style="width:100%">
-                <div class="text">Caption Two</div>
+                <div class="text">
+                    <p>Simple tap gameplay but difficult to master. And the term difficult to master is really under-highlighted.
+                        A game where two ancient extinct species battle for the control of the jungle to become the supreme
+                        ruler of the dead, also to decide who gets the remote.</p>
+                    <div class="mbr-section-btn" buttons="0">
+                        <a class="btn  display-4 btn-warning" href="https://play.google.com/store/apps/details?id=com.bizarreGameStudios.dodoVsDino">PLAY STORE</a>
+                        <a class="btn  btn-white-outline display-4" href="page3.html#header8-1f">MORE</a>
+                    </div>
+                </div>
             </div>
 
             <div class="mySlides">
                 <div class="numbertext">3 / 3</div>
                 <img src="assets/images/dsa.png" style="width:100%">
-                <div class="text">Caption Three</div>
+                <div class="text">
+                    <p>Check out the games that we have conceptualized and are currently in progress</p>
+                    <div class="mbr-section-btn" buttons="0">
+                        <a class="btn btn-info display-4" href="page4.html#info1-1n">TAKE ME THERE</a>
+                    </div>
+                </div>
             </div>
 
             <!-- Next and previous buttons -->
@@ -816,20 +829,6 @@
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-    }
-    var slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        slideIndex++;
-        if (slideIndex > slides.length) { slideIndex = 1 }
-        slides[slideIndex - 1].style.display = "block";
-        setTimeout(showSlides, 4000); // Change image every 2 seconds
     }
 </script>
 
